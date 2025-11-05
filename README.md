@@ -1,77 +1,156 @@
-# Real-Time Chat Application with Socket.io
+# 💬 Realtime Chat App
 
-This assignment focuses on building a real-time chat application using Socket.io, implementing bidirectional communication between clients and server.
+A full-stack **Realtime Chat Application** built with the **MERN stack** (MongoDB, Express, React, Node.js) and **Socket.IO** — supporting multiple chat rooms, online/offline indicators, and typing notifications.  
 
-## Assignment Overview
+---
 
-You will build a chat application with the following features:
-1. Real-time messaging using Socket.io
-2. User authentication and presence
-3. Multiple chat rooms or private messaging
-4. Real-time notifications
-5. Advanced features like typing indicators and read receipts
+## 🚀 Features
 
-## Project Structure
+✅ **User Authentication** (Login & Register with JWT)  
+✅ **Realtime Messaging** using Socket.IO  
+✅ **Multiple Chat Rooms** (Create or Join any room)  
+✅ **User Presence** (Online/Offline indicators)  
+✅ **Typing Status** (See when users are typing)  
+✅ **Timestamps** for each message  
+✅ **Auto Scroll & Pagination** for messages  
+✅ **Responsive UI** built with modern CSS styling  
+✅ **Smooth UI Transitions** for Auth ↔ Chat screens  
+
+---
+
+## 🧩 Tech Stack
+
+| Category | Technology |
+|-----------|-------------|
+| Frontend | React (Vite) |
+| Backend | Node.js + Express |
+| Database | MongoDB |
+| Realtime Engine | Socket.IO |
+| Authentication | JWT (JSON Web Token) |
+| Styling | Custom CSS / Tailwind-ready |
+| Deployment | Render / Vercel / MongoDB Atlas |
+
+---
+
+## ⚙️ Project Setup
+
+### 🔧 Backend Setup
+
+```bash
+cd server
+npm install
+npm start
+```
+
+Create a `.env` file inside the `server` directory:
 
 ```
-socketio-chat/
-├── client/                 # React front-end
-│   ├── public/             # Static files
-│   ├── src/                # React source code
-│   │   ├── components/     # UI components
-│   │   ├── context/        # React context providers
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── pages/          # Page components
-│   │   ├── socket/         # Socket.io client setup
-│   │   └── App.jsx         # Main application component
-│   └── package.json        # Client dependencies
-├── server/                 # Node.js back-end
-│   ├── config/             # Configuration files
-│   ├── controllers/        # Socket event handlers
-│   ├── models/             # Data models
-│   ├── socket/             # Socket.io server setup
-│   ├── utils/              # Utility functions
-│   ├── server.js           # Main server file
-│   └── package.json        # Server dependencies
-└── README.md               # Project documentation
+PORT=5000
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_secret_key
 ```
 
-## Getting Started
+---
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week5-Assignment.md` file
-4. Complete the tasks outlined in the assignment
+### 🖥️ Frontend Setup
 
-## Files Included
+```bash
+cd client
+npm install
+npm run dev
+```
 
-- `Week5-Assignment.md`: Detailed assignment instructions
-- Starter code for both client and server:
-  - Basic project structure
-  - Socket.io configuration templates
-  - Sample components for the chat interface
+---
 
-## Requirements
+## 🧠 Folder Structure
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Modern web browser
-- Basic understanding of React and Express
+```
+client/
+│── src/
+│   ├── components/
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── ChatRoom.jsx
+│   │   ├── ChatRoomList.jsx
+│   ├── context/
+│   │   └── AuthContext.jsx
+│   ├── styles/
+│   │   └── ChatRoom.css
+│   └── App.jsx
+│
+server/
+│── models/
+│── routes/
+│── socket.js
+│── server.js
+│── .env
+│── package.json
+```
 
-## Submission
+---
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+## 🌐 Realtime Features
 
-1. Complete both the client and server portions of the application
-2. Implement the core chat functionality
-3. Add at least 3 advanced features
-4. Document your setup process and features in the README.md
-5. Include screenshots or GIFs of your working application
-6. Optional: Deploy your application and add the URLs to your README.md
+| Feature | Description |
+|----------|--------------|
+| **Join Room** | Users can join multiple rooms dynamically |
+| **Send Message** | Realtime broadcasting with timestamps |
+| **Online Users** | Track and display connected users |
+| **Typing Indicator** | Displays when someone is typing |
+| **Pagination** | Loads older messages on scroll |
 
-## Resources
+---
 
-- [Socket.io Documentation](https://socket.io/docs/v4/)
-- [React Documentation](https://react.dev/)
-- [Express.js Documentation](https://expressjs.com/)
-- [Building a Chat Application with Socket.io](https://socket.io/get-started/chat) 
+## 🧾 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|-----------|-------------|
+| POST | `/api/auth/register` | Register new user |
+| POST | `/api/auth/login` | Login and get token |
+| GET | `/api/messages/:roomId` | Fetch messages by room |
+
+---
+
+## 📸 Screenshots
+
+### Login Page  
+> ![Login Page](./screenshots/login-page.jpg)
+
+### Chat Room  
+> ![Chat Room](./screenshots/chat-room.jpg)
+
+---
+
+## 🔐 Environment Variables
+
+| Variable | Description |
+|-----------|-------------|
+| `PORT` | Server Port |
+| `MONGO_URI` | MongoDB connection URI |
+| `JWT_SECRET` | Token secret key |
+
+---
+
+## 🌟 Future Enhancements
+
+- 📱 Mobile app version with React Native  
+- 🖼️ Image / File Sharing support  
+- 🔔 Push Notifications  
+- 💾 Message encryption  
+- 👥 Group Admin Roles  
+
+---
+
+## 👨‍💻 Author
+
+**Joseph Chege (KyUCOMRADE)**  
+> Passionate about full-stack development and realtime systems.  
+> 📧 Email: [chegejoseph5006@gmail.com](mailto:chegejoseph5006@gmail.com)  
+> 🐙 GitHub: [@KyUCOMRADE](https://github.com/KyUCOMRADE)  
+
+---
+
+## 🏁 License
+
+MIT © 2025 Joseph Chege  
+Feel free to fork, improve, and star ⭐ this project.
