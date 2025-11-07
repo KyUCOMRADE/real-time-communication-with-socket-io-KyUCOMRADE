@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_BACKEND_URL; // ← backend URL
+const API_URL = import.meta.env.REACT_APP_BACKEND_URL; // ← backend URL
 
 const Register = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });

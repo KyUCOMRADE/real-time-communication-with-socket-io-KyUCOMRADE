@@ -16,13 +16,13 @@ const ChatRoom = () => {
   const [typingUser, setTypingUser] = useState("");
   const socketRef = useRef(null);
 
-  const SOCKET_URL = process.env.REACT_APP_BACKEND_URL; // ← backend URL
+  const SOCKET_URL = import.meta.env.REACT_APP_BACKEND_URL; // ← backend URL
 
   useEffect(() => {
     if (!user) return;
 
     // 🔌 Connect to socket.io chat namespace
-    socketRef.current = io(`${SOCKET_URL}/chat`);
+    socketRef.current = io(`${import.meta.env.VITE_BACKEND_URL}/chat`);
 
     socketRef.current.emit("joinRoom", { username: user.username, room });
 
