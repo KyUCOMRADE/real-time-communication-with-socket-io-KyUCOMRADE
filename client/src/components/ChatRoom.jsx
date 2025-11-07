@@ -16,11 +16,13 @@ const ChatRoom = () => {
   const [typingUser, setTypingUser] = useState("");
   const socketRef = useRef(null);
 
-  // 🔌 Connect to socket.io chat namespace
+  const SOCKET_URL = import.meta.env.REACT_APP_BACKEND_URL; // ← backend URL
+
   useEffect(() => {
     if (!user) return;
 
-    socketRef.current = io("http://localhost:5000/chat");
+    // 🔌 Connect to socket.io chat namespace
+    socketRef.current = io(`${import.meta.env.VITE_BACKEND_URL}/chat`);
 
     socketRef.current.emit("joinRoom", { username: user.username, room });
 
@@ -35,7 +37,7 @@ const ChatRoom = () => {
     return () => {
       socketRef.current.disconnect();
     };
-  }, [user, room]);
+  }, [user, room, SOCKET_URL]);
 
   // 💬 Send message
   const sendMessage = (text) => {

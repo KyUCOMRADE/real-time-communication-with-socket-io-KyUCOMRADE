@@ -9,6 +9,7 @@ const dotenv = require("dotenv");
 const Message = require("./models/Message");
 const authRoutes = require("./routes/authRoutes");
 
+// Load environment variables from .env
 dotenv.config();
 
 const app = express();
@@ -25,17 +26,18 @@ app.use("/api/auth", authRoutes);
 const server = http.createServer(app);
 
 // --- MongoDB Connection ---
+const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/socketchat";
+
 mongoose
-  .connect("mongodb://localhost:27017/socketchat", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.log("❌ MongoDB Error:", err.message));
 
 // --- Socket.io Setup ---
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
+
 const io = new Server(server, {
-  cors: { origin: "http://localhost:5173", methods: ["GET", "POST"] },
+  cors: { origin: CLIENT_URL, methods: ["GET", "POST"] },
   pingInterval: 25000,
   pingTimeout: 60000,
 });
