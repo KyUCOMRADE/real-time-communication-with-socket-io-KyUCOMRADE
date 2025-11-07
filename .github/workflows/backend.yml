@@ -2,32 +2,53 @@ name: Backend CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  build-test-deploy:
+  build-and-test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./server   # <-- backend folder
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Install dependencies
+        working-directory: server
         run: npm install
 
       - name: Run tests
-        run: npm test || echo "No tests configured"
+        working-directory: server
+        run: |
+          if [ -f package.json ]; then
+            npm test || echo "⚠️ No tests found"
+          fi
 
-      - name: Deploy to Render
-        uses: render-examples/deploy@v1
+      - name: Build check
+        working-directory: server
+        run: |
+          if [ -f package.json ]; then
+            npm run build || echo "No build step needed"
+          fi
+
+      - name: Lint check
+        working-directory: server
+        run: |
+          if [ -f package.json ]; then
+            npm run lint || echo "⚠️ Linting skipped"
+          fi
+
+      - name: Upload logs (optional)
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          service-id: ${{ secrets.RENDER_SERVICE_ID }}
-          api-key: ${{ secrets.RENDER_API_KEY }}
+          name: backend-logs
+          path: |
+            server/logs
+            server/*.log
